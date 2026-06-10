@@ -1,0 +1,49 @@
+version: "3"
+
+tasks:
+  default:
+    desc: サブコマンド一覧
+    cmds:
+      - task --list-all
+
+  all-down:
+    desc: すべてのコンテナを終了
+    cmds:
+      - docker compose down --remove-orphans
+
+  dev-pull:
+    desc: 公開イメージをpull
+    cmds:
+      - docker compose pull
+
+  dev-up:
+    desc: 開発用containerの開始（公開イメージを使用）
+    cmds:
+      - docker compose up -d
+      - docker compose logs -f
+
+  dev-up-build:
+    desc: ローカルビルドして開始（docker-compose.override.yml使用）
+    cmds:
+      - docker compose up -d --build
+      - docker compose logs -f
+
+  dev-down:
+    desc: 開発用containerの終了
+    cmds:
+      - docker compose down
+
+  httpd-exec:
+    desc: httpdコンテナに接続
+    cmds:
+      - docker compose exec -u www-data httpd bash
+
+  db-exec:
+    desc: DBコンテナに接続
+    cmds:
+      - docker compose exec db bash
+
+  dump-seed:
+    desc: シードデータ(DB)のダンプ
+    cmds:
+      - bash dump_seed.sh

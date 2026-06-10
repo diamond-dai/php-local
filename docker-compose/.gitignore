@@ -1,0 +1,17 @@
+# 案件・端末固有の環境変数（使う場合）
+.env.local
+
+# ローカルビルド切替用（リネームして使う想定なのでコミットしない）
+docker-compose.override.yml
+
+# maildump が保存した送信メール
+logs/*
+!logs/.gitkeep
+
+# DB実データ（バインドマウント時）
+mysql/data/*
+!mysql/data/.gitkeep
+
+# シードダンプ（コミットする場合はこの行を外す）
+seed/sql/*
+!seed/sql/.gitkeep

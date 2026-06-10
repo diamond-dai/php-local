@@ -1,0 +1,6 @@
+.DS_Store
+
+# Go ビルド成果物
+docker/go/maildump
+
+# compose配下の生成物は docker-compose/.gitignore で管理

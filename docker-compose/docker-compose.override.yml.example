@@ -1,0 +1,9 @@
+# ローカルビルドで試す場合に使用する。
+# このファイルを docker-compose.override.yml にリネームすると
+# docker compose up -d で自動的にマージされ、公開イメージの代わりにローカルビルドを使う。
+# 不要な場合はリネームまたは削除する。
+services:
+  httpd:
+    build:
+      context: ../docker
+      dockerfile: Dockerfile

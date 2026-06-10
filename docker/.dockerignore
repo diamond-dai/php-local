@@ -1,0 +1,6 @@
+# ビルドコンテキストから除外（ビルド高速化・成果物混入防止）
+**/*.md
+go/maildump
+test.sh
+Taskfile.yml
+.DS_Store

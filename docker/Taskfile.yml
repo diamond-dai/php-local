@@ -1,0 +1,45 @@
+version: "3"
+
+vars:
+  IMAGE_NAME: ghcr.io/diamond-dai/php-local
+
+tasks:
+  default:
+    desc: サブコマンド一覧
+    cmds:
+      - task --list-all
+
+  image-build:
+    desc: ローカルアーキテクチャのみビルド（高速）
+    cmds:
+      - start=$(date +%s); docker build -t {{.IMAGE_NAME}}:latest . ; echo "elapsed $(($(date +%s) - start))s"
+
+  image-build-nocache:
+    desc: キャッシュなしでフルビルド
+    cmds:
+      - start=$(date +%s); docker build --no-cache -t {{.IMAGE_NAME}}:latest . ; echo "elapsed $(($(date +%s) - start))s"
+
+  image-buildx:
+    desc: マルチプラットフォームビルド (amd64+arm64)、pushなし
+    cmds:
+      - docker buildx create --name multiarch --use 2>/dev/null || docker buildx use multiarch
+      - start=$(date +%s); docker buildx build --platform linux/amd64,linux/arm64
+        -t {{.IMAGE_NAME}}:latest . ; echo "elapsed $(($(date +%s) - start))s"
+
+  test:
+    desc: ビルド済みイメージのスモークテスト
+    cmds:
+      - bash test.sh {{.IMAGE_NAME}}:latest
+
+  build-and-test:
+    desc: ビルド → テスト
+    cmds:
+      - task: image-build
+      - task: test
+
+  image-push:
+    desc: マルチプラットフォームビルド & push (linux/amd64 + linux/arm64)
+    cmds:
+      - docker buildx create --name multiarch --use 2>/dev/null || docker buildx use multiarch
+      - start=$(date +%s); docker buildx build --platform linux/amd64,linux/arm64
+        -t {{.IMAGE_NAME}}:latest --push . ; echo "elapsed $(($(date +%s) - start))s"
