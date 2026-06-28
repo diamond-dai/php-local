@@ -8,10 +8,12 @@ Adminer と maildump を httpd コンテナに同梱している。
 公開イメージ（`ghcr.io/diamond-dai/php-local`）を使う場合:
 
 ```bash
-cp .env.example .env   # 既に .env がある場合は不要
 docker compose up -d
 docker compose logs -f
 ```
+
+`.env` はコミット済み（非secretのデフォルト値）。案件・端末固有の上書きは
+`.env.local`（gitignore対象）に書く。
 
 ローカルビルドで試す場合は、`compose.override.yml.example` を
 `compose.override.yml` にリネームしてから起動する:
