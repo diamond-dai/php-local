@@ -13,11 +13,11 @@ docker compose up -d
 docker compose logs -f
 ```
 
-ローカルビルドで試す場合は、`docker-compose.override.yml.example` を
-`docker-compose.override.yml` にリネームしてから起動する:
+ローカルビルドで試す場合は、`compose.override.yml.example` を
+`compose.override.yml` にリネームしてから起動する:
 
 ```bash
-cp docker-compose.override.yml.example docker-compose.override.yml
+cp compose.override.yml.example compose.override.yml
 docker compose up -d --build
 ```
 
@@ -25,10 +25,10 @@ docker compose up -d --build
 
 | ファイル                    | 構成                          |
 | --------------------------- | ----------------------------- |
-| `docker-compose.yml`        | httpd + MariaDB（既定）       |
-| `docker-compose.no-db.yml`  | httpd のみ（DBを使わない案件）|
+| `compose.yml`        | httpd + MariaDB（既定）       |
+| `compose.no-db.yml`  | httpd のみ（DBを使わない案件）|
 
-DBを使わない案件では `docker-compose.no-db.yml` を `docker-compose.yml` に
+DBを使わない案件では `compose.no-db.yml` を `compose.yml` に
 リネームすれば、`task` コマンドがそのまま使える（元のファイルは退避・削除する）。
 
 - アプリ: `http://localhost/`
@@ -73,6 +73,11 @@ $pdo = new PDO(
     getenv('DB_PASSWORD')
 );
 ```
+
+## ログ
+
+Apache のアクセスログ・エラーログは stdout / stderr に転送しているので、
+`docker compose logs -f` でそのまま追える。
 
 ## メール
 

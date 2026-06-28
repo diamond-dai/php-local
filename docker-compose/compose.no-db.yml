@@ -2,8 +2,8 @@
 # MySQLなしパターン用の compose。
 # DBを使わない（または外部DBに接続する）案件向けに httpd だけを起動する。
 #
-# この案件でMySQLを使わない場合は、本ファイルを docker-compose.yml にリネームすれば
-# task コマンド（task dev-up 等）がそのまま使える。元の docker-compose.yml は
+# この案件でMySQLを使わない場合は、本ファイルを compose.yml にリネームすれば
+# task コマンド（task dev-up 等）がそのまま使える。元の compose.yml は
 # 削除するか退避すること。
 # =============================================================================
 services:
@@ -19,4 +19,6 @@ services:
     init: true
     tty: true
     env_file:
-      - .env
+      - path: .env
+      - path: .env.local
+        required: false

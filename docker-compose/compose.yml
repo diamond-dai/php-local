@@ -9,7 +9,9 @@ services:
       - ./mysql/data:/mysql-data
       - ./seed/sql:/docker-entrypoint-initdb.d
     env_file:
-      - .env
+      - path: .env
+      - path: .env.local
+        required: false
     init: true
     tty: true
 
@@ -26,7 +28,9 @@ services:
     init: true
     tty: true
     env_file:
-      - .env
+      - path: .env
+      - path: .env.local
+        required: false
     depends_on:
       - db
 

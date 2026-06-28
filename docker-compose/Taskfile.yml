@@ -23,7 +23,7 @@ tasks:
       - docker compose logs -f
 
   dev-up-build:
-    desc: ローカルビルドして開始（docker-compose.override.yml使用）
+    desc: ローカルビルドして開始（compose.override.yml使用）
     cmds:
       - docker compose up -d --build
       - docker compose logs -f

@@ -2,7 +2,7 @@
 .env.local
 
 # ローカルビルド切替用（リネームして使う想定なのでコミットしない）
-docker-compose.override.yml
+compose.override.yml
 
 # maildump が保存した送信メール
 logs/*
