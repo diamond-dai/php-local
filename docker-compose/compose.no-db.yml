@@ -11,7 +11,7 @@ services:
   httpd:
     image: ghcr.io/diamond-dai/php-local
     ports:
-      - "${HTTPD_BIND:-127.0.0.1}:${HTTPD_PORT:-80}:80"
+      - "${HTTPD_BIND:-127.0.0.1}:${HTTPD_PORT:-60000}:80"
     volumes:
       - ./htdocs/:/var/www/html/
       - ./logs/:/var/log/maildump/
