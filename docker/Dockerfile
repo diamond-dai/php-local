@@ -76,6 +76,12 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     && rm -rf /var/lib/apt/lists/* \
     && apt-get clean
 
+# Apache のアクセス/エラーログを stdout/stderr に転送
+# （docker compose logs -f でログが見えるようにする。公式 php:apache・httpd と同じ方式）
+RUN ln -sf /dev/stdout /var/log/apache2/access.log \
+    && ln -sf /dev/stderr /var/log/apache2/error.log \
+    && ln -sf /dev/stdout /var/log/apache2/other_vhosts_access.log
+
 # 旧公式PHPイメージとの互換パス
 # conf.d の実体を /usr/local/etc/php/conf.d/ (旧パス) に統一し、新パスからシンボリックリンク
 RUN mkdir -p /usr/local/etc/php/conf.d && \
